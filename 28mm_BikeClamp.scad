@@ -1,58 +1,55 @@
-quality = 60; // 200 for final export...
+quality = 200; // 200 for final export...
+
+c_height = 10;
+c_thickness = 5;
+c_edge = 1;
+c_gap = 14;
+c_tab_mult = c_thickness * 2.8;
+c_hole_radius = 1.5;
+
 
 difference()
 {
-   // Build main structure
-	translate([0, 0, 0]) {
-		cube([100, 20, 10], center=true);
-		rotate_extrude(convexity = 10)
-		{
-			translate([30, 0, 0])
-				circle(r=6, $fn=quality);
-		}
+	// Additive items within union...
+	union()
+	{
+
+		// Main circle
+		rotate_extrude($fn=quality)
+			translate([c_gap, 0, 0])
+				polygon( points=[[0,0],
+					[c_thickness - c_edge, 0],
+					[c_thickness, c_edge],
+					[c_thickness, c_height-c_edge],
+					[c_thickness - c_edge, c_height],
+					[0, c_height]] );
+
+		// 'left' tabs
+		translate([c_gap, 1, 0])
+			cube([c_tab_mult, c_thickness, c_height], center=false);
+		translate([c_gap, - (c_thickness + 1), 0])
+			cube([c_tab_mult, c_thickness, c_height], center=false);
+
+		// 'right' tabs
+		translate([-(c_gap + c_tab_mult), 1, 0])
+			cube([c_tab_mult, c_thickness, c_height], center=false);
+		translate([-(c_gap + c_tab_mult), - (c_thickness + 1), 0])
+			cube([c_tab_mult, c_thickness, c_height], center=false);
+
 	}
 
-   // Remove main cylinder from toroid
-	translate([0, 0, -10])
-		cylinder(20, 28, 28, $fn=quality);
+	// Subtractive 'difference' items below...
 
-   // Flatten top and bottom of toroid
-	translate([0, 0, -6])
-		cube([100, 100, 2], center=true);
-	translate([0, 0, 6])
-		cube([100, 100, 2], center=true);
+	// Split into two parts
+	translate([-(c_thickness + c_gap), -1, 0])
+		cube([(c_gap + c_thickness) * 2, 2, c_height], center=false);
 
-   // Split into two even pieces
-	translate([0, 0, 0])
-		cube([100, 2, 20], center=true);
-
-	// Remove for hex nut
-	//translate([42, -8, 0])
-		//rotate([90, 0, 0])
-			//cylinder(4, 5, 5, $fn=6);
-
-	// Remove for hex bolt heads
-	translate([42, -7, 0])
+	// Screw holes
+	translate([c_gap + (c_tab_mult * .66), c_thickness + 1, (c_height / 2)])
 		rotate([90, 0, 0])
-			cylinder(4, 4, 4, $fn=40);
-	translate([42, 11, 0])
+			cylinder(c_thickness * 2 + 2, c_hole_radius, c_hole_radius, $fn=quality / 3);
+	translate([-(c_gap + (c_tab_mult * .66)), c_thickness + 1, (c_height / 2)])
 		rotate([90, 0, 0])
-			cylinder(4, 4, 4, $fn=40);
-	translate([-42, -7, 0])
-		rotate([90, 0, 0])
-			cylinder(4, 4, 4, $fn=40);
-	translate([-42, 11, 0])
-		rotate([90, 0, 0])
-			cylinder(4, 4, 4, $fn=40);
+			cylinder(c_thickness * 2 + 2, c_hole_radius, c_hole_radius, $fn=quality / 3);
 
-
-	// Drill holes
-	translate([42, 15, 0])
-		rotate([90, 0, 0])
-			cylinder(30, 2, 2, $fn=20);
-
-	translate([-42, 15, 0])
-		rotate([90, 0, 0])
-			cylinder(30, 2, 2, $fn=20);
 }
-
