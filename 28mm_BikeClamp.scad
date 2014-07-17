@@ -1,11 +1,14 @@
-quality = 200; // 200 for final export...
+quality = 20; // 200 for final export...
 
-c_height = 10;
-c_thickness = 5;
-c_edge = 1;
-c_gap = 14.5;
-c_tab_mult = c_thickness * 2.8;
-c_hole_radius = 1.5;
+c_post_size = 29;          			// Size of Bike post to fit (mine is 28mmx29mm)
+c_gap = c_post_size / 2;
+
+c_height = 10;							// How tall to make clamp side
+c_thickness = 5;						// How thick (around post)
+c_edge = 1.5;								// Bevel edge size
+
+c_tab_mult = c_thickness * 2.8;		// Width of side tabs (relative)
+c_hole_radius = 1.5;					// Radius of screw holes
 
 
 difference()
