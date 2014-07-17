@@ -45,20 +45,17 @@ difference()
 		translate([-(c_post_size * 1.5/4), -(c_phone_height + c_gap), 0])
 			cube([c_post_size * 3/4, c_phone_height, c_height], center=false);
 
-		linear_extrude(height = c_phone_height, center = false, convexity = 10, twist = 0, slices = 20, scale = 1.0) 
+		linear_extrude(height = c_height / 2, center = false, convexity = 10, twist = 0, slices = 20, scale = 1.0) 
 		{
-			// TODO: Fix this polygon to be oriented the right way, and to
 			// build the right profile for the phone params:
 			// (c_phone_width, c_phone_thickness)
 
-			translate([0, -40, 0])
-				polygon( points=[[0,0],
-					[c_thickness - c_edge, 0],
-					[c_thickness, c_edge],
-					[c_thickness, c_height-c_edge],
-					[c_thickness - c_edge, c_height],
-					[0, c_height]] );
-
+			translate([-(c_phone_width/2), -(c_gap+c_phone_height), 0])
+				polygon( points=[[0,0], 
+						[c_phone_width, 0], 
+						[c_phone_width, c_thickness], 
+						[0, c_thickness],
+				] );
 		}
 
 	}
