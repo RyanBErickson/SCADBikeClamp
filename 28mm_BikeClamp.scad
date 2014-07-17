@@ -3,7 +3,7 @@ quality = 200; // 200 for final export...
 c_height = 10;
 c_thickness = 5;
 c_edge = 1;
-c_gap = 14;
+c_gap = 14.5;
 c_tab_mult = c_thickness * 2.8;
 c_hole_radius = 1.5;
 
