@@ -1,4 +1,4 @@
-quality = 20; // 200 for final export...
+quality = 200; // 200 for final export...
 
 c_post_size = 29;          			// Size of Bike post to fit (mine is 28mmx29mm)
 c_gap = c_post_size / 2;
@@ -14,7 +14,7 @@ c_phone_height = 10;					// Height of phone above post
 
 c_phone_width = 73;					// Width between side clamps
 c_phone_clamp_length = 100;		// Length of clamp arm
-c_phone_thickness = 14 + 4;				// Thickness -- TODO: This is off by some amount (4mm for my phone) 
+c_phone_thickness = 14;				// Thickness of phone (front-back)
 
 c_bracket_thickness = c_thickness * .66;
 c_bracket_tab = c_tab_mult * .66;
@@ -55,18 +55,18 @@ difference()
 			translate([-(c_phone_width/2), -(c_gap+c_phone_height), 0])
 				polygon( points=[[0,0], 
 						[c_phone_width, 0],
-[c_phone_width, -c_phone_height],
-[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_height],
-[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_height-c_bracket_thickness],
-[c_phone_width+c_bracket_thickness, -c_phone_height-c_bracket_thickness],
+[c_phone_width, -c_phone_thickness],
+[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_thickness],
+[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_thickness-c_bracket_thickness],
+[c_phone_width+c_bracket_thickness, -c_phone_thickness-c_bracket_thickness],
 [c_phone_width+c_bracket_thickness, c_bracket_thickness],
 						[c_phone_width, c_bracket_thickness], 
 						[0, c_bracket_thickness],
 [-c_bracket_thickness, c_bracket_thickness],
-[-c_bracket_thickness, -c_phone_height-c_bracket_thickness],
-[c_bracket_tab-c_bracket_thickness, -c_phone_height-c_bracket_thickness],
-[c_bracket_tab-c_bracket_thickness, -c_phone_height],
-[0, -c_phone_height],
+[-c_bracket_thickness, -c_phone_thickness-c_bracket_thickness],
+[c_bracket_tab-c_bracket_thickness, -c_phone_thickness-c_bracket_thickness],
+[c_bracket_tab-c_bracket_thickness, -c_phone_thickness],
+[0, -c_phone_thickness],
 
 				] );
 		}
