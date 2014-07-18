@@ -1,4 +1,4 @@
-quality = 20; // 200 for final export...
+quality = 200; // 200 for final export...
 
 c_post_size = 29;          			// Size of Bike post to fit (mine is 28mmx29mm)
 c_gap = c_post_size / 2;
@@ -16,6 +16,8 @@ c_phone_width = 74;					// Width between side clamps
 c_phone_clamp_length = 100;		// Length of clamp arm
 c_phone_thickness = 14;				// Thickness 
 
+c_bracket_thickness = c_thickness * .66;
+c_bracket_tab = c_tab_mult * .66;
 
 difference()
 {
@@ -52,15 +54,51 @@ difference()
 
 			translate([-(c_phone_width/2), -(c_gap+c_phone_height), 0])
 				polygon( points=[[0,0], 
-						[c_phone_width, 0], 
-						[c_phone_width, c_thickness], 
-						[0, c_thickness],
+						[c_phone_width, 0],
+[c_phone_width, -c_phone_height],
+[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_height],
+[c_phone_width+c_bracket_thickness-c_bracket_tab, -c_phone_height-c_bracket_thickness],
+[c_phone_width+c_bracket_thickness, -c_phone_height-c_bracket_thickness],
+[c_phone_width+c_bracket_thickness, c_bracket_thickness],
+						[c_phone_width, c_bracket_thickness], 
+						[0, c_bracket_thickness],
+[-c_bracket_thickness, c_bracket_thickness],
+[-c_bracket_thickness, -c_phone_height-c_bracket_thickness],
+[c_bracket_tab-c_bracket_thickness, -c_phone_height-c_bracket_thickness],
+[c_bracket_tab-c_bracket_thickness, -c_phone_height],
+[0, -c_phone_height],
+
 				] );
 		}
-
 	}
 
 	// Subtractive 'difference' items below...
+		linear_extrude(height = c_height, center = false, convexity = 10, twist = 0, slices = 20, scale = 1.0) 
+		{
+			// build the right profile for the phone params:
+			// (c_phone_width, c_phone_thickness)
+
+			translate([-(c_post_size*1/4), -(c_gap+c_phone_height), 0])
+				polygon( points=[[0,0],
+					[0,c_bracket_thickness], 
+					[c_post_size*1/2,c_bracket_thickness], 
+					[c_post_size*1/2, 0]
+				]);
+
+		}
+
+	translate([0, 0, c_height/2])
+		rotate([90, 0, 0])
+			cylinder(c_post_size+c_phone_height+10, c_hole_radius, c_hole_radius, $fn=quality / 3, center=true);
+
+	translate([0, 0, c_height/2])
+		rotate([90, 0, 0])
+			cylinder(c_post_size+4, 4, 4, $fn=6, center=true);
+/*
+	translate([0, 0, 0])
+		rotate([90, 0, 0])
+			cylinder(c_thickness * 2 + 2, c_hole_radius, c_hole_radius, $fn=quality / 3, center=true);
+*/
 
 	// Screw holes
 	translate([c_gap + (c_tab_mult * .66), c_thickness + 1, (c_height / 4)])
