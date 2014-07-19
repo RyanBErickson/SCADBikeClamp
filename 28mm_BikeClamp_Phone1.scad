@@ -10,9 +10,9 @@ c_edge = 1.5;								// Bevel edge size
 c_tab_mult = c_thickness * 2.8;		// Width of side tabs (relative)
 c_hole_radius = 1.5;					// Radius of screw holes
 
-c_phone_height = 10;					// Height of phone above post
+c_phone_height = 11;					// Height of phone above post
 
-c_phone_width = 73;					// Width between side clamps
+c_phone_width = 74;					// Width between side clamps
 c_phone_clamp_length = 100;		// Length of clamp arm
 c_phone_thickness = 14;				// Thickness of phone (front-back)
 
