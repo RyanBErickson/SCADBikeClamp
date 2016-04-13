@@ -13,11 +13,11 @@ c_hole_radius = 1.5;					// Radius of screw holes
 c_phone_height = 11;
 
 // MODIFY THESE FOR YOUR PHONE...
-c_phone_width = 74;		// Width between side clamps (default 74)
-c_phone_thickness = 14;		// Thickness of phone (front-back) (default 14)
+c_phone_width = 80.5;		// Width between side clamps (orig 74, new phone 80.5)
+c_phone_thickness = 16;		// Thickness of phone (front-back) (orig 14, new 16)
 // ---- end Phone-specific...
 
-c_phone_clamp_length = 100;		// Length of clamp arm
+c_phone_clamp_length = 120;		// Length of clamp arm (orig 100, new 120)
 
 c_bracket_thickness = c_thickness * .66;
 c_bracket_tab = c_tab_mult * .66;
@@ -65,12 +65,16 @@ difference()
 		translate([(-c_phone_width / 2)-c_bracket_thickness / 2, c_start_bracket_y - c_phone_thickness- c_bracket_thickness, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 		translate([(-c_phone_width / 2)-c_bracket_thickness / 2, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 }
+
+
 		hull()
 {
 		translate([(-c_phone_width / 2)-c_bracket_thickness / 2, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 
 		translate([(c_phone_width / 2)+c_bracket_thickness / 2, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 }
+
+
 		hull()
 {
 		translate([(c_phone_width / 2)+c_bracket_thickness / 2, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
@@ -82,6 +86,18 @@ difference()
 		translate([(c_phone_width / 2)+c_bracket_thickness / 2, c_start_bracket_y - c_phone_thickness - c_bracket_thickness, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 		translate([(c_phone_width / 2)+c_bracket_thickness / 2 - (c_bracket_tab - c_bracket_thickness), c_start_bracket_y - c_phone_thickness - c_bracket_thickness, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
 }
+
+// Add reinforcing braces on side legs...
+		hull()
+{
+		translate([15, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
+
+		translate([5, c_start_bracket_y+7.5, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
+		translate([-5, c_start_bracket_y+7.5, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
+
+		translate([-15, c_start_bracket_y, z_offset]) cylinder(c_height / 2, c_bracket_thickness / 2, c_bracket_thickness / 2, $fn=quality);
+}
+
 
 	}
 

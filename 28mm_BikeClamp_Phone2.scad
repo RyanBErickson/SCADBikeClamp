@@ -12,9 +12,9 @@ c_hole_radius = 1.5;					// Radius of screw holes
 
 c_phone_height = 10;					// Height of phone above post
 
-c_phone_width = 73;					// Width between side clamps
-c_phone_clamp_length = 100;	 		// Length of clamp arm
-c_phone_thickness = 14;				// Thickness of phone (front-back)
+c_phone_width = 80.5;		          // Width between side clamps (orig 74, new phone 80.5)
+c_phone_clamp_length = 90;	 		// Length of clamp arm
+c_phone_thickness = 16;		      // Thickness of phone (front-back) (orig 14, new 16)
 
 c_bracket_thickness = c_thickness * .66;
 c_bracket_tab = c_tab_mult * .66;
